@@ -5,6 +5,7 @@ body {
 }
 canvas{display:block}
 h1 {
+  text-alighn: center;
   position: absolute;
   top: 20%;
   left: 50%;
@@ -15,4 +16,5 @@ h1 {
   font-weight: 900;
   -webkit-user-select: none;
   user-select: none;
+
 }
