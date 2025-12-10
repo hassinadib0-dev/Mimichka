@@ -36,7 +36,7 @@ h1 {
 
 /* موقع العنوان الأول (المرحلة 2: تحت H1) */
 #clickTracker1 {
-  top: 25vh; 
+  top: 70%; 
   left: 50%;
   transform: translateX(-50%);
   color: #aaa; 
