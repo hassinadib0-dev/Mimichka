@@ -151,7 +151,7 @@ const messageElement = document.getElementById('message');
 const stageTitle2 = document.getElementById('stageTitle2');
 const cipherContainer = document.getElementById('cipherContainer');
 const cipherText = document.getElementById('cipherText');
-const cipherImage = document.getElementById('cipherImage');
+// const cipherImage = document.getElementById('cipherImage'); // تم حذفه من HTML 
 const cipherAnswerSection = document.getElementById('cipherAnswerSection');
 const cipherAnswerInput = document.getElementById('cipherAnswerInput');
 const cipherCheckButton = document.getElementById('cipherCheckButton');
@@ -165,6 +165,43 @@ const dateAnswerSection = document.getElementById('dateAnswerSection');
 const dateAnswerInput = document.getElementById('dateAnswerInput'); 
 const dateCheckButton = document.getElementById('dateCheckButton'); 
 const dateMessage = document.getElementById('dateMessage');
+
+// عناصر المرحلة 6 الجديدة (3 :) - Math/5:50
+const stageTitle4 = document.getElementById('stageTitle4'); 
+const mathContainer = document.getElementById('mathContainer'); 
+const mathText = document.getElementById('mathText'); 
+const mathAnswerSection = document.getElementById('mathAnswerSection'); 
+const mathAnswerInput = document.getElementById('mathAnswerInput'); 
+const mathCheckButton = document.getElementById('mathCheckButton'); 
+const mathMessage = document.getElementById('mathMessage');
+
+// عناصر المرحلة 7 الجديدة (4 :) - Cafe
+const stageTitle5 = document.getElementById('stageTitle5'); 
+const photoContainer = document.getElementById('photoContainer'); 
+const photoText = document.getElementById('photoText'); 
+const photoAnswerSection = document.getElementById('photoAnswerSection'); 
+const photoAnswerInput = document.getElementById('photoAnswerInput'); 
+const photoCheckButton = document.getElementById('photoCheckButton'); 
+const photoMessage = document.getElementById('photoMessage');
+
+// عناصر المرحلة 8 الجديدة (5 :) - New Morse
+const stageTitle6 = document.getElementById('stageTitle6'); 
+const cipherContainer2 = document.getElementById('cipherContainer2'); 
+const cipherText2 = document.getElementById('cipherText2'); 
+const cipherImage2 = document.getElementById('cipherImage2'); 
+const cipherAnswerSection2 = document.getElementById('cipherAnswerSection2'); 
+const cipherAnswerInput2 = document.getElementById('cipherAnswerInput2'); 
+const cipherCheckButton2 = document.getElementById('cipherCheckButton2'); 
+const cipherMessage2 = document.getElementById('cipherMessage2');
+
+// عناصر المرحلة النهائية (المرحلة 9)
+const stageTitle7 = document.getElementById('stageTitle7'); 
+const finalContainer = document.getElementById('finalContainer'); 
+const finalText = document.getElementById('finalText'); 
+const finalAnswerSection = document.getElementById('finalAnswerSection'); 
+const finalAnswerInput = document.getElementById('finalAnswerInput'); 
+const finalCheckButton = document.getElementById('finalCheckButton'); 
+const finalMessage = document.getElementById('finalMessage');
 
 
 let stage = 1;
@@ -182,6 +219,21 @@ const ACCEPTED_ANSWERS_STAGE_2 = ["net9ablou"];
 // نص وإجابة المرحلة 5 الجديدة
 const DATE_STORY_TEXT = "11 decembre 2005 , \nQuel jour ! \nKima lyoum 20 snee lteli touldt \nQuel jour !\nBa3d'hom b 5 Ayem khlatet ena , vendredi nharet'ha w chtee mizebet mel smee .\nW nti Quel jour ?";
 const ACCEPTED_ANSWERS_STAGE_3 = ["dimanche"]; 
+
+// نص وإجابة المرحلة 6 الجديدة
+const MATH_STORY_TEXT = "El math , 3le 9ad me kont n7ebou 3lkhr k matière w naaml kif 3liha 3le 9ad me kont me ne7mlch profet'ha w les séances te3ha so men fass3a l fass3a dhaya3t l math barcha . Hata 3amet l bac mndkhlch raghm enha a9wa matière. \nKhw 3ad kif 9orbet période El révision 3mlthom lkol w hatit fi 9lbi w 9rit w fhemt , 9olt El math me lezmouch yti7 3le El 16 . \ntaaref 9dh jebt ?";
+const ACCEPTED_ANSWERS_STAGE_4 = ["5:50"]; 
+
+// نص وإجابة المرحلة 7 الجديدة
+const PHOTO_STORY_TEXT = "wlh c bien hak tjewb bel s7i7, bon El 7ajet Li 7atit'hom sehlin w taw hani BCH nssahalek . MCH b3thtlk tasswira ena ? 3inaya me 9aloulk Chay ?";
+const ACCEPTED_ANSWERS_STAGE_5 = ["cafe"];
+
+// نص وإجابة المرحلة 8 الجديدة (مورس)
+const MORSE_CIPHER_TEXT = " . .-.. -.-. .... --- - - / .-.. ..-. --- ..- -.- ";
+const ACCEPTED_ANSWERS_STAGE_6 = ["ELCHOTT lfouk", "elchott lfouk", "elchottlfouk", "ELCHOTTlFOUk", "elchott Lfouk"]; 
+
+// نص وإجابة المرحلة النهائية (9) - تم تعديله حسب طلب المستخدم
+const FINAL_STORY_TEXT = "netssawer Rak chl9t deja Eli les reponses ykawnou jomla";
 
 
 // إعداد الحالة الأولية
@@ -248,6 +300,83 @@ function startTypingEffectStage3(text) {
             dateAnswerSection.classList.remove('hidden'); 
             dateAnswerInput.style.pointerEvents = 'auto'; 
             dateCheckButton.style.pointerEvents = 'auto';
+        }
+    }, 40); 
+}
+
+// --- وظيفة الطباعة الحرفية (Typing Effect) للمرحلة 6 (Math) ---
+function startTypingEffectStage4(text) {
+    let i = 0;
+    mathText.textContent = ''; 
+    mathAnswerSection.classList.add('hidden'); // إخفاء الإدخال أثناء الكتابة
+    
+    const typingInterval = setInterval(() => {
+        if (i < text.length) {
+            mathText.textContent += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(typingInterval);
+            
+            // إظهار قسم الإجابة بعد الانتهاء
+            mathAnswerSection.classList.remove('hidden'); 
+            mathAnswerInput.style.pointerEvents = 'auto'; 
+            mathCheckButton.style.pointerEvents = 'auto';
+        }
+    }, 40); 
+}
+
+// --- وظيفة الطباعة الحرفية (Typing Effect) للمرحلة 7 (Cafe) ---
+function startTypingEffectStage5(text) {
+    let i = 0;
+    photoText.textContent = ''; 
+    photoAnswerSection.classList.add('hidden'); // إخفاء الإدخال أثناء الكتابة
+    
+    const typingInterval = setInterval(() => {
+        if (i < text.length) {
+            photoText.textContent += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(typingInterval);
+            
+            // إظهار قسم الإجابة بعد الانتهاء
+            photoAnswerSection.classList.remove('hidden'); 
+            photoAnswerInput.style.pointerEvents = 'auto'; 
+            photoCheckButton.style.pointerEvents = 'auto';
+        }
+    }, 40); 
+}
+
+// --- وظيفة الطباعة الحرفية (Typing Effect) للمرحلة 8 (New Morse) ---
+function startTypingEffectStage6(text) {
+    // هذه المرة لا نحتاج إلى تأثير الطباعة الحرفية للنص المشفر لأنه نص ثابت كبير.
+    cipherText2.textContent = text;
+    cipherAnswerSection2.classList.add('hidden'); 
+    
+    // إظهار الصورة المرفقة إذا كانت ضرورية هنا 
+    cipherImage2.classList.remove('hidden');
+    
+    // إظهار قسم الإجابة مباشرة
+    cipherAnswerSection2.classList.remove('hidden'); 
+    cipherAnswerInput2.style.pointerEvents = 'auto'; 
+    cipherCheckButton2.style.pointerEvents = 'auto';
+}
+
+// --- وظيفة الطباعة الحرفية (Typing Effect) للمرحلة النهائية (9) ---
+function startTypingEffectFinalStage(text, callback) {
+    let i = 0;
+    finalText.textContent = ''; 
+    
+    const typingInterval = setInterval(() => {
+        if (i < text.length) {
+            finalText.textContent += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(typingInterval);
+            
+            // Call the callback function if provided
+            if (callback && typeof callback === 'function') {
+                setTimeout(callback, 2000); // 2 second delay after text finishes
+            }
         }
     }, 40); 
 }
@@ -378,7 +507,7 @@ function checkAnswer() {
         setTimeout(startCountdown, 3000);
         
     } else {
-        messageElement.textContent ="khamem mariem win tnjm tal9a el theweni w el d9aye9 w el sweye3...";
+        messageElement.textContent ="khamem mariem win tnjm tal9a el theweni w el d9aye9 w el sweye3 mongela mathalan...";
         messageElement.style.color = '#ff0000';
     }
 }
@@ -392,9 +521,6 @@ function startTransitionStage() {
     stageTitle2.classList.remove('hidden');
     cipherContainer.classList.remove('hidden');
     
-    // إخفاء العناصر غير المطلوبة في هذه المرحلة
-    cipherImage.classList.add('hidden');
-    
     // إعادة تعيين حقل الإجابة
     cipherAnswerInput.value = '';
     cipherMessage.textContent = '';
@@ -405,22 +531,25 @@ function startTransitionStage() {
 
 // --- وظيفة التحقق من إجابة المرحلة الجديدة (المرحلة 4) ---
 function checkAnswerStage2() {
-    const userAnswer = cipherAnswerInput.value.trim();
+    const userAnswer = cipherAnswerInput.value.trim().toLowerCase();
     
     const isCorrect = ACCEPTED_ANSWERS_STAGE_2.some(accepted => 
         accepted === userAnswer
     );
 
     if (isCorrect) {
-        cipherMessage.textContent = "behi brcha , net3adew..";
+        cipherMessage.textContent = "behi brcha , net3adew \n ( tenssech tssajel ajwebtk , khlik metfakrethom )";
         cipherMessage.style.color = '#00ff00';
         
-        // إخفاء عناصر المرحلة 4 
-        cipherContainer.classList.add('hidden');
-        stageTitle2.classList.add('hidden');
-        
-        // البدء بالمرحلة 5 بعد 3 ثوانٍ
-        setTimeout(startStage5, 3000); 
+        // الانتقال للمرحلة 5
+        setTimeout(() => {
+            // إخفاء عناصر المرحلة 4 
+            cipherContainer.classList.add('hidden');
+            stageTitle2.classList.add('hidden');
+            
+            // البدء بالمرحلة 5
+            startStage5(); 
+        }, 2000); 
         
     } else {
         cipherMessage.textContent ="kelma t3awdet 3 marrat , ektebha kima tl9aha...";
@@ -447,24 +576,224 @@ function startStage5() {
 
 // --- وظيفة التحقق من إجابة المرحلة 5 الجديدة ---
 function checkAnswerStage5() {
-    const userAnswer = dateAnswerInput.value.trim().toLowerCase(); // تحويل إلى أحرف صغيرة لتسهيل التحقق
+    const userAnswer = dateAnswerInput.value.trim().toLowerCase(); 
     
     const isCorrect = ACCEPTED_ANSWERS_STAGE_3.some(accepted => 
         accepted === userAnswer
     );
 
     if (isCorrect) {
-        dateMessage.textContent = " sa7it , choft el story mte3i ?...";
+        dateMessage.textContent = " sa7it , choft el story lekhra mte3i ?...";
         dateMessage.style.color = '#00ff00';
         
-        // هنا يمكنك إضافة دالة للمرحلة التالية 
-        // setTimeout(startNextStage, 3000); 
+        // الانتقال للمرحلة 6 الجديدة (Math/5:50)
+        setTimeout(startStage6, 2000); 
         
     } else {
         dateMessage.textContent =" taw hedhi me tala3t'hech ? 11 decembre 2005 b ema nhar jee ? ( en francais ) ...";
         dateMessage.style.color = '#ff0000';
     }
 }
+
+// --- وظيفة بدء المرحلة 6 الجديدة (Math/5:50) ---
+function startStage6() {
+    stage = 6;
+    
+    // إخفاء عناصر المرحلة 5
+    stageTitle3.classList.add('hidden');
+    dateContainer.classList.add('hidden');
+    
+    // إظهار عناصر المرحلة 6 ذات الصلة
+    stageTitle4.classList.remove('hidden');
+    mathContainer.classList.remove('hidden');
+    
+    // إعادة تعيين حقول الإجابة والرسالة
+    mathAnswerInput.value = '';
+    mathMessage.textContent = '';
+    
+    // بدء تأثير الطباعة للنص الجديد
+    startTypingEffectStage4(MATH_STORY_TEXT);
+}
+
+
+// --- وظيفة التحقق من إجابة المرحلة 6 الجديدة ---
+function checkAnswerStage6() {
+    const userAnswer = mathAnswerInput.value.trim();
+    
+    const isCorrect = ACCEPTED_ANSWERS_STAGE_4.some(accepted => 
+        accepted === userAnswer
+    );
+
+    if (isCorrect) {
+        mathMessage.textContent = " bon ena jebt 5,75 , anw sa7it wassel...";
+        mathMessage.style.color = '#00ff00';
+        
+        // الانتقال للمرحلة 7 الجديدة (Cafe)
+        setTimeout(startStage7, 2000); 
+        
+    } else {
+        mathMessage.textContent =" chouf 9dch jebt ena fi el math w ektrbha kima hiya ";
+        mathMessage.style.color = '#ff0000';
+    }
+}
+
+// --- وظيفة بدء المرحلة 7 الجديدة (Cafe) ---
+function startStage7() {
+    stage = 7;
+    
+    // إخفاء عناصر المرحلة 6
+    stageTitle4.classList.add('hidden');
+    mathContainer.classList.add('hidden');
+    
+    // إظهار عناصر المرحلة 7 ذات الصلة
+    stageTitle5.classList.remove('hidden');
+    photoContainer.classList.remove('hidden');
+    
+    // إعادة تعيين حقول الإجابة والرسالة
+    photoAnswerInput.value = '';
+    photoMessage.textContent = '';
+    
+    // بدء تأثير الطباعة للنص الجديد
+    startTypingEffectStage5(PHOTO_STORY_TEXT);
+}
+
+// --- وظيفة التحقق من إجابة المرحلة 7 الجديدة ---
+function checkAnswerStage7() {
+    const userAnswer = photoAnswerInput.value.trim().toLowerCase(); // تحويل إلى أحرف صغيرة
+    
+    const isCorrect = ACCEPTED_ANSWERS_STAGE_5.some(accepted => 
+        accepted === userAnswer
+    );
+
+    if (isCorrect) {
+        photoMessage.textContent = " haw aandek m3a de9et el mole7dha , taaref l morse code ? ";
+        photoMessage.style.color = '#00ff00';
+        
+        // الانتقال للمرحلة 8 الجديدة (New Morse)
+        setTimeout(startStage8, 2000); 
+        
+    } else {
+        photoMessage.textContent =" ken me 3rftch , abaathli msg";
+        photoMessage.style.color = '#ff0000';
+    }
+}
+
+// --- وظيفة بدء المرحلة 8 الجديدة (New Morse) ---
+function startStage8() {
+    stage = 8;
+    
+    // إخفاء عناصر المرحلة 7
+    stageTitle5.classList.add('hidden');
+    photoContainer.classList.add('hidden');
+    
+    // إظهار عناصر المرحلة 8 ذات الصلة
+    stageTitle6.classList.remove('hidden');
+    cipherContainer2.classList.remove('hidden');
+    
+    // إعادة تعيين حقول الإجابة والرسالة
+    cipherAnswerInput2.value = '';
+    cipherMessage2.textContent = '';
+    
+    // بدء تأثير الطباعة للنص المشفر (عرضه مباشرة)
+    startTypingEffectStage6(MORSE_CIPHER_TEXT);
+}
+
+
+// --- وظيفة التحقق من إجابة المرحلة 8 الجديدة ---
+function checkAnswerStage8() {
+    const userAnswer = cipherAnswerInput2.value.trim().toLowerCase().replace(/\s/g, ''); 
+    
+    const normalizedAcceptedAnswers = ACCEPTED_ANSWERS_STAGE_6.map(ans => ans.toLowerCase().replace(/\s/g, ''));
+    
+    const isCorrect = normalizedAcceptedAnswers.includes(userAnswer);
+
+    if (isCorrect) {
+        cipherMessage2.textContent = " دمت رافعة الرؤوس ";
+        cipherMessage2.style.color = '#00ff00';
+        
+        // الانتقال للمرحلة النهائية (9)
+        setTimeout(startFinalStage, 3000); 
+        
+    } else {
+        cipherMessage2.textContent =" morse code , taba3 bel 7arf bel 7arf";
+        cipherMessage2.style.color = '#ff0000';
+    }
+}
+
+// --- وظيفة بدء المرحلة النهائية (9) ---
+function startFinalStage() {
+    stage = 9;
+    
+    // إخفاء عناصر المرحلة 8
+    stageTitle6.classList.add('hidden');
+    cipherContainer2.classList.add('hidden');
+    
+    // إظهار عناصر المرحلة 9 ذات الصلة
+    stageTitle7.classList.remove('hidden');
+    finalContainer.classList.remove('hidden');
+    
+    // إخفاء حقول الإجابة والزر مباشرةً
+    finalAnswerSection.classList.add('hidden'); 
+    
+    // بدء تأثير الطباعة للنص الجديد
+    startTypingEffectFinalStage(FINAL_STORY_TEXT, () => {
+        // Callback function after typing effect finishes
+        
+        // 1. إخفاء النص والعنوان
+        stageTitle7.classList.add('hidden');
+        finalContainer.classList.add('hidden');
+        
+        // 2. إطلاق ألعاب نارية كثيفة
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+
+        // Trigger an initial large burst (Massive burst)
+        for (let i = 0; i < 20; i++) {
+            birthday.fireworks.push(new Firework(
+                random(birthday.spawnA, birthday.spawnB),
+                birthday.height,
+                centerX,
+                centerY,
+                random(0, 360),
+                random(80, 150)
+            ));
+        }
+
+        // Trigger more bursts for a short period
+        let burstCount = 0;
+        const burstInterval = setInterval(() => {
+            if (burstCount >= 10) { // Stop after 10 quick bursts
+                clearInterval(burstInterval);
+                
+                // 3. إظهار العنوان الرئيسي بعد توقف الألعاب النارية الكثيفة
+                setTimeout(() => {
+                    pageTitle.classList.remove('hidden');
+                }, 1000); // 1 second after the last burst
+                
+                return;
+            }
+            
+            // Trigger a large cluster of fireworks in the center
+            for (let i = 0; i < 5; i++) {
+                birthday.fireworks.push(new Firework(
+                    random(birthday.spawnA, birthday.spawnB),
+                    birthday.height,
+                    centerX + random(-100, 100), // Slight randomness around center
+                    centerY + random(-100, 100),
+                    random(0, 360),
+                    random(50, 120)
+                ));
+            }
+            burstCount++;
+        }, 300); // Every 300ms
+    });
+}
+
+// --- وظيفة التحقق من إجابة المرحلة النهائية (9) ---
+// تم حذفها بناء على طلب المستخدم
+// function checkAnswerFinalStage() {
+//     // ... logic removed
+// }
 
 
 // --- تعيين مستمعي الأحداث ---
@@ -495,6 +824,38 @@ dateAnswerInput.addEventListener('keydown', (e) => {
         checkAnswerStage5();
     }
 });
+
+// مستمع أحداث المرحلة 6 الجديدة (Math/5:50)
+mathCheckButton.addEventListener('click', checkAnswerStage6);
+mathAnswerInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        checkAnswerStage6();
+    }
+});
+
+// مستمع أحداث المرحلة 7 الجديدة (Cafe)
+photoCheckButton.addEventListener('click', checkAnswerStage7);
+photoAnswerInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        checkAnswerStage7();
+    }
+});
+
+// مستمع أحداث المرحلة 8 الجديدة (New Morse)
+cipherCheckButton2.addEventListener('click', checkAnswerStage8);
+cipherAnswerInput2.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        checkAnswerStage8();
+    }
+});
+
+// مستمع أحداث المرحلة النهائية (9) - تم حذفهما بناء على طلب المستخدم
+// finalCheckButton.addEventListener('click', checkAnswerFinalStage);
+// finalAnswerInput.addEventListener('keydown', (e) => {
+//     if (e.key === 'Enter') {
+//         checkAnswerFinalStage();
+//     }
+// });
 
 
   ;(function loop(){

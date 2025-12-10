@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing Script&family=Source+Code+Pro');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Source+Code+Pro&family=Chivo+Mono:wght@700&display=swap');
 body {
   margin: 0;
   background: #020202;
@@ -77,7 +77,7 @@ h1 {
     max-width: 600px;
     text-align: center;
     z-index: 15;
-    color: #E0B0FF; 
+    color: #fff; /* تم التغيير إلى الأبيض */
     font-family: "Source Code Pro", monospace;
     line-height: 1.8;
     transition: opacity 0.5s;
@@ -166,7 +166,7 @@ h1 {
     white-space: pre-wrap; 
     direction: rtl; 
     text-align: center;
-    color:#E0B0FF;
+    color:#fff; /* تم التغيير إلى الأبيض */
 }
 
 /* صورة شفرة مورس */
@@ -243,7 +243,7 @@ h1 {
     z-index: 19;
     transition: opacity 0.5s;
     font-family: "Source Code Pro", monospace;
-    color:#E0B0FF;
+    color:#fff; /* تم التغيير إلى الأبيض */
 }
 
 /* الرسالة الجديدة (تظهر بالكتابة الحرفية) */
@@ -281,6 +281,313 @@ h1 {
 }
 
 #dateMessage {
+    margin-top: 15px;
+    font-size: 1.2em;
+    color: #fff;
+}
+
+/* ------------------------------------- */
+/* --- تنسيق عناصر المرحلة السادسة (3 :) - Math --- */
+/* ------------------------------------- */
+
+/* عنوان المرحلة الجديدة (3 :) */
+#stageTitle4 {
+    opacity: 0;
+    position: absolute;
+    top: 5vh; 
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-family: "Source Code Pro", monospace;
+    font-size: 3em;
+    font-weight: 300;
+    z-index: 20; 
+    transition: opacity 0.5s;
+}
+
+/* حاوية الرسالة والسؤال والإجابة */
+#mathContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+    z-index: 21; 
+    transition: opacity 0.5s;
+    font-family: "Source Code Pro", monospace;
+    color:#fff; /* تم التغيير إلى الأبيض */
+}
+
+/* الرسالة الجديدة (تظهر بالكتابة الحرفية) */
+#mathText {
+    font-size: 1em;
+    white-space: pre-wrap; 
+    direction: rtl; 
+    text-align: center;
+}
+
+/* قسم الإجابة الجديد للمرحلة 6 */
+#mathAnswerSection {
+    margin-top: 30px;
+}
+
+#mathAnswerInput {
+    padding: 10px;
+    width: 70%;
+    border: 2px solid #E0B0FF;
+    background: transparent;
+    color: #fff;
+    font-size: 1em;
+    text-align: center;
+}
+
+#mathCheckButton {
+    padding: 10px 20px;
+    margin-left: 10px;
+    background: #D16587;
+    color: #020202;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#mathMessage {
+    margin-top: 15px;
+    font-size: 1.2em;
+    color: #fff;
+}
+
+/* ------------------------------------- */
+/* --- تنسيق عناصر المرحلة السابعة (4 :) - Cafe --- */
+/* ------------------------------------- */
+
+/* عنوان المرحلة الجديدة (4 :) */
+#stageTitle5 {
+    opacity: 0;
+    position: absolute;
+    top: 5vh; 
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-family: "Source Code Pro", monospace;
+    font-size: 3em;
+    font-weight: 300;
+    z-index: 22; 
+    transition: opacity 0.5s;
+}
+
+/* حاوية الرسالة والسؤال والإجابة */
+#photoContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+    z-index: 23; 
+    transition: opacity 0.5s;
+    font-family: "Source Code Pro", monospace;
+    color:#fff; /* تم التغيير إلى الأبيض */
+}
+
+/* الرسالة الجديدة (تظهر بالكتابة الحرفية) */
+#photoText {
+    font-size: 1em;
+    white-space: pre-wrap; 
+    direction: rtl; 
+    text-align: center;
+}
+
+/* قسم الإجابة الجديد للمرحلة 7 */
+#photoAnswerSection {
+    margin-top: 30px;
+}
+
+#photoAnswerInput {
+    padding: 10px;
+    width: 70%;
+    border: 2px solid #E0B0FF;
+    background: transparent;
+    color: #fff;
+    font-size: 1em;
+    text-align: center;
+}
+
+#photoCheckButton {
+    padding: 10px 20px;
+    margin-left: 10px;
+    background: #D16587;
+    color: #020202;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#photoMessage {
+    margin-top: 15px;
+    font-size: 1.2em;
+    color: #fff;
+}
+
+/* ------------------------------------- */
+/* --- تنسيق عناصر المرحلة الثامنة (5 :) - New Morse --- */
+/* ------------------------------------- */
+
+/* عنوان المرحلة الجديدة (5 :) */
+#stageTitle6 {
+    opacity: 0;
+    position: absolute;
+    top: 5vh; 
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-family: "Source Code Pro", monospace;
+    font-size: 3em;
+    font-weight: 300;
+    z-index: 24; 
+    transition: opacity 0.5s;
+}
+
+/* حاوية الرسالة المشفرة والصورة والإجابة للمرحلة 8 */
+#cipherContainer2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+    z-index: 25; 
+    transition: opacity 0.5s;
+    font-family: "Source Code Pro", monospace;
+}
+
+/* الرسالة المشفرة (تظهر بالكتابة الحرفية) */
+#cipherText2 {
+    font-size: 3em; /* خط كبير كما طلبت */
+    white-space: pre-wrap; 
+    direction: ltr; /* النص المشفر عادةً يكون من اليسار لليمين */
+    text-align: center;
+    color:#ffffff; /* باللون الأبيض كما طلبت */
+    font-family: 'Chivo Mono', monospace; /* خط أحادي العرض للحروف المشفرة */
+}
+
+/* صورة شفرة مورس الثانية */
+#cipherImage2 {
+    max-width: 100%;
+    height: auto;
+    margin: 20px auto;
+    display: block;
+    border: 1px solid #E0B0FF;
+    transition: opacity 0.5s;
+}
+
+/* قسم الإجابة الجديد لفك الشفرة */
+#cipherAnswerSection2 {
+    margin-top: 30px;
+}
+
+#cipherAnswerInput2 {
+    padding: 10px;
+    width: 70%;
+    border: 2px solid #E0B0FF;
+    background: transparent;
+    color: #fff;
+    font-size: 1em;
+    text-align: center; 
+}
+
+#cipherCheckButton2 {
+    padding: 10px 20px;
+    margin-left: 10px; 
+    background: #D16587;
+    color: #020202;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#cipherMessage2 {
+    margin-top: 15px;
+    font-size: 1.2em;
+    color: #fff;
+}
+
+/* ------------------------------------- */
+/* --- تنسيق عناصر المرحلة التاسعة (6 :) - Final --- */
+/* ------------------------------------- */
+
+/* عنوان المرحلة الجديدة (6 :) */
+#stageTitle7 {
+    opacity: 0;
+    position: absolute;
+    top: 5vh; 
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-family: "Source Code Pro", monospace;
+    font-size: 3em;
+    font-weight: 300;
+    z-index: 26; 
+    transition: opacity 0.5s;
+}
+
+/* حاوية الرسالة والسؤال والإجابة */
+#finalContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+    z-index: 27; 
+    transition: opacity 0.5s;
+    font-family: "Source Code Pro", monospace;
+    color:#fff;
+}
+
+/* الرسالة الجديدة (تظهر بالكتابة الحرفية) */
+#finalText {
+    font-size: 1.2em; 
+    white-space: pre-wrap; 
+    direction: rtl; 
+    text-align: center;
+}
+
+/* قسم الإجابة الجديد للمرحلة 9 */
+#finalAnswerSection {
+    margin-top: 30px;
+}
+
+#finalAnswerInput {
+    padding: 10px;
+    width: 70%;
+    border: 2px solid #E0B0FF;
+    background: transparent;
+    color: #fff;
+    font-size: 1em;
+    text-align: center;
+}
+
+#finalCheckButton {
+    padding: 10px 20px;
+    margin-left: 10px;
+    background: #D16587;
+    color: #020202;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#finalMessage {
     margin-top: 15px;
     font-size: 1.2em;
     color: #fff;
