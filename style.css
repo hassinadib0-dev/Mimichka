@@ -128,12 +128,13 @@ h1 {
 }
 
 /* ------------------------------------- */
-/* --- تنسيق عناصر المرحلة الرابعة --- */
+/* --- تنسيق عناصر المرحلة الرابعة (1 :) --- */
 /* ------------------------------------- */
 
 /* عنوان المرحلة الجديدة (1 :) */
 #stageTitle2 {
-    position: absolute;
+    opacity: 0;
+  position: absolute;
     top: 5vh; 
     left: 50%;
     transform: translateX(-50%);
@@ -156,15 +157,16 @@ h1 {
     text-align: center;
     z-index: 17;
     transition: opacity 0.5s;
+    font-family: "Source Code Pro", monospace;
 }
 
 /* الرسالة المشفرة (تظهر بالكتابة الحرفية) */
 #cipherText {
-    font-size: 2.5em; /* خط كبير وواضح */
-    color: #fff; 
-    font-family: "Source Code Pro", monospace;
+    font-size: 1em;
     white-space: pre-wrap; 
-    margin-bottom: 20px;
+    direction: rtl; 
+    text-align: center;
+    color:#E0B0FF;
 }
 
 /* صورة شفرة مورس */
@@ -189,12 +191,12 @@ h1 {
     background: transparent;
     color: #fff;
     font-size: 1em;
-    text-align: center; /* يمكن تغييرها إلى right إذا لزم الأمر */
+    text-align: center; 
 }
 
 #cipherCheckButton {
     padding: 10px 20px;
-    margin-left: 10px; /* تم تعديله ليتناسب مع اتجاه النص في الإدخال */
+    margin-left: 10px; 
     background: #D16587;
     color: #020202;
     border: none;
@@ -204,6 +206,81 @@ h1 {
 }
 
 #cipherMessage {
+    margin-top: 15px;
+    font-size: 1.2em;
+    color: #fff;
+}
+
+
+/* ------------------------------------- */
+/* --- تنسيق عناصر المرحلة الخامسة (2 :) --- */
+/* ------------------------------------- */
+
+/* عنوان المرحلة الجديدة (2 :) */
+#stageTitle3 {
+    opacity: 0;
+    position: absolute;
+    top: 5vh; 
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-family: "Source Code Pro", monospace;
+    font-size: 3em;
+    font-weight: 300;
+    z-index: 18;
+    transition: opacity 0.5s;
+}
+
+/* حاوية الرسالة والسؤال والإجابة */
+#dateContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+    z-index: 19;
+    transition: opacity 0.5s;
+    font-family: "Source Code Pro", monospace;
+    color:#E0B0FF;
+}
+
+/* الرسالة الجديدة (تظهر بالكتابة الحرفية) */
+#dateText {
+    font-size: 1em;
+    white-space: pre-wrap; 
+    direction: ltr; 
+    text-align: center;
+}
+
+/* قسم الإجابة الجديد للمرحلة 5 */
+#dateAnswerSection {
+    margin-top: 30px;
+}
+
+#dateAnswerInput {
+    padding: 10px;
+    width: 70%;
+    border: 2px solid #E0B0FF;
+    background: transparent;
+    color: #fff;
+    font-size: 1em;
+    text-align: center;
+}
+
+#dateCheckButton {
+    padding: 10px 20px;
+    margin-left: 10px;
+    background: #D16587;
+    color: #020202;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#dateMessage {
     margin-top: 15px;
     font-size: 1.2em;
     color: #fff;

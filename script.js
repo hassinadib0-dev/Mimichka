@@ -133,13 +133,13 @@ let then = timestamp()
 let birthday = new Birthday
 window.onresize = () => birthday.resize()
 
-// العناصر
+// العناصر الأساسية
 const pageTitle = document.getElementById('pageTitle');
 const clickTracker1 = document.getElementById('clickTracker1'); 
 const clickTracker2 = document.getElementById('clickTracker2'); 
 const toggleButton = document.getElementById('toggleButton');
 
-// عناصر القصة والإجابة الجديدة
+// عناصر القصة والإجابة للمرحلة 3
 const storyContainer = document.getElementById('storyContainer');
 const storyTextElement = document.getElementById('storyText');
 const answerSection = document.getElementById('answerSection');
@@ -147,12 +147,41 @@ const answerInput = document.getElementById('answerInput');
 const checkButton = document.getElementById('checkButton');
 const messageElement = document.getElementById('message');
 
+// عناصر المرحلة الانتقالية/4 (1 :)
+const stageTitle2 = document.getElementById('stageTitle2');
+const cipherContainer = document.getElementById('cipherContainer');
+const cipherText = document.getElementById('cipherText');
+const cipherImage = document.getElementById('cipherImage');
+const cipherAnswerSection = document.getElementById('cipherAnswerSection');
+const cipherAnswerInput = document.getElementById('cipherAnswerInput');
+const cipherCheckButton = document.getElementById('cipherCheckButton');
+const cipherMessage = document.getElementById('cipherMessage');
+
+// عناصر المرحلة 5 الجديدة (2 :)
+const stageTitle3 = document.getElementById('stageTitle3'); 
+const dateContainer = document.getElementById('dateContainer'); 
+const dateText = document.getElementById('dateText'); 
+const dateAnswerSection = document.getElementById('dateAnswerSection'); 
+const dateAnswerInput = document.getElementById('dateAnswerInput'); 
+const dateCheckButton = document.getElementById('dateCheckButton'); 
+const dateMessage = document.getElementById('dateMessage');
+
+
 let stage = 1;
 let tapCount = 0; 
 
-// القصة والسؤال والإجابة الصحيحة
+// القصة والسؤال والإجابة الصحيحة للمرحلة 3
 const STORY_TEXT = "Lw9t ,\nWnti ta9ra fi El klem hedha ena mnich bjnbk , kolou bsbb lwa9t , taaref Mariem netwa7chek w brcha w nesstanek \nbel theweni w El d9aya9 w El sweye3";
-const ACCEPTED_ANSWERS = ["1062"]; // تم تثبيت الإجابة الصحيحة على "1062" بناءً على طلبك الأخير
+const ACCEPTED_ANSWERS_STAGE_1 = ["1026"]; 
+
+
+// النص والسؤال والإجابة الصحيحة للمرحلة 4
+const TRANSITION_TEXT = "Okey \nmt3rfch 9dch metwa7chek w nheb net9ablou , wlh habit njik l Sousse w net9ablou ema mnjmtch devoirat w wa9t , l7assl a partir de cette question, Sajel les reponses te3k ta3rfch 3al denya Belek tsst79hm men hnee lin net9ablou ...\nY9oulou ' fi el i3ada ifeda ' ";
+const ACCEPTED_ANSWERS_STAGE_2 = ["net9ablou"]; 
+
+// نص وإجابة المرحلة 5 الجديدة
+const DATE_STORY_TEXT = "11 decembre 2005 , \nQuel jour ! \nKima lyoum 20 snee lteli touldt \nQuel jour !\nBa3d'hom b 5 Ayem khlatet ena , vendredi nharet'ha w chtee mizebet mel smee .\nW nti Quel jour ?";
+const ACCEPTED_ANSWERS_STAGE_3 = ["dimanche"]; 
 
 
 // إعداد الحالة الأولية
@@ -160,7 +189,7 @@ clickTracker2.textContent = 'TAP HERE 5 TIMES';
 clickTracker2.style.pointerEvents = 'auto';
 
 
-// --- وظيفة الطباعة الحرفية (Typing Effect) ---
+// --- وظيفة الطباعة الحرفية (Typing Effect) للمرحلة 3 ---
 function startTypingEffect(text) {
     let i = 0;
     storyContainer.classList.remove('hidden');
@@ -177,6 +206,48 @@ function startTypingEffect(text) {
             answerSection.classList.remove('hidden'); 
             answerInput.style.pointerEvents = 'auto'; 
             checkButton.style.pointerEvents = 'auto';
+        }
+    }, 40); 
+}
+
+// --- وظيفة الطباعة الحرفية (Typing Effect) للمرحلة 4 ---
+function startTypingEffectStage2(text) {
+    let i = 0;
+    cipherText.textContent = ''; 
+    cipherAnswerSection.classList.add('hidden'); // إخفاء الإدخال أثناء الكتابة
+    
+    const typingInterval = setInterval(() => {
+        if (i < text.length) {
+            cipherText.textContent += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(typingInterval);
+            
+            // إظهار قسم الإجابة بعد الانتهاء
+            cipherAnswerSection.classList.remove('hidden'); 
+            cipherAnswerInput.style.pointerEvents = 'auto'; 
+            cipherCheckButton.style.pointerEvents = 'auto';
+        }
+    }, 40); 
+}
+
+// --- وظيفة الطباعة الحرفية (Typing Effect) للمرحلة 5 ---
+function startTypingEffectStage3(text) {
+    let i = 0;
+    dateText.textContent = ''; 
+    dateAnswerSection.classList.add('hidden'); // إخفاء الإدخال أثناء الكتابة
+    
+    const typingInterval = setInterval(() => {
+        if (i < text.length) {
+            dateText.textContent += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(typingInterval);
+            
+            // إظهار قسم الإجابة بعد الانتهاء
+            dateAnswerSection.classList.remove('hidden'); 
+            dateAnswerInput.style.pointerEvents = 'auto'; 
+            dateCheckButton.style.pointerEvents = 'auto';
         }
     }, 40); 
 }
@@ -272,8 +343,11 @@ function startCountdown() {
         if (count < 0) {
             clearInterval(countdownInterval);
             
-            // إخفاء جميع العناصر المكتوبة بالكامل عندما يصل إلى الصفر
+            // 1. إخفاء جميع العناصر المكتوبة بالكامل
             hideAllStoryElements();
+            
+            // 2. بدء المرحلة الجديدة (المرحلة الانتقالية/4)
+            startTransitionStage(); 
         }
         
         count--;
@@ -282,11 +356,11 @@ function startCountdown() {
 }
 
 
-// --- وظيفة التحقق من الإجابة ---
+// --- وظيفة التحقق من الإجابة (المرحلة 3) ---
 function checkAnswer() {
     const userAnswer = answerInput.value.trim();
     
-    const isCorrect = ACCEPTED_ANSWERS.some(accepted => 
+    const isCorrect = ACCEPTED_ANSWERS_STAGE_1.some(accepted => 
         accepted === userAnswer
     );
 
@@ -294,14 +368,13 @@ function checkAnswer() {
         messageElement.textContent = "BRAVOO ,wlh hak tala3t'ha \n taw najmou nebdew";
         messageElement.style.color = '#00ff00';
         
-        // إخفاء حقل الإدخال والزر (كما طلبت مسبقاً)
+        // إخفاء حقل الإدخال والزر
         answerInput.classList.add('hidden');
         checkButton.classList.add('hidden');
         answerInput.style.pointerEvents = 'none';
         checkButton.style.pointerEvents = 'none';
 
-        // البدء بالعد التنازلي بعد 3 ثوانٍ من ظهور رسالة النجاح
-        // تم ترك التوقيت (3 ثوانٍ) لمنح وقت لقراءة الرسالة
+        // البدء بالعد التنازلي بعد 3 ثوانٍ
         setTimeout(startCountdown, 3000);
         
     } else {
@@ -311,14 +384,115 @@ function checkAnswer() {
 }
 
 
+// --- وظيفة بدء المرحلة الانتقالية / المرحلة 4 الفعلية ---
+function startTransitionStage() {
+    stage = 4;
+    
+    // إظهار العناصر ذات الصلة
+    stageTitle2.classList.remove('hidden');
+    cipherContainer.classList.remove('hidden');
+    
+    // إخفاء العناصر غير المطلوبة في هذه المرحلة
+    cipherImage.classList.add('hidden');
+    
+    // إعادة تعيين حقل الإجابة
+    cipherAnswerInput.value = '';
+    cipherMessage.textContent = '';
+    
+    // بدء تأثير الطباعة للنص الجديد
+    startTypingEffectStage2(TRANSITION_TEXT);
+}
+
+// --- وظيفة التحقق من إجابة المرحلة الجديدة (المرحلة 4) ---
+function checkAnswerStage2() {
+    const userAnswer = cipherAnswerInput.value.trim();
+    
+    const isCorrect = ACCEPTED_ANSWERS_STAGE_2.some(accepted => 
+        accepted === userAnswer
+    );
+
+    if (isCorrect) {
+        cipherMessage.textContent = "behi brcha , net3adew..";
+        cipherMessage.style.color = '#00ff00';
+        
+        // إخفاء عناصر المرحلة 4 
+        cipherContainer.classList.add('hidden');
+        stageTitle2.classList.add('hidden');
+        
+        // البدء بالمرحلة 5 بعد 3 ثوانٍ
+        setTimeout(startStage5, 3000); 
+        
+    } else {
+        cipherMessage.textContent ="kelma t3awdet 3 marrat , ektebha kima tl9aha...";
+        cipherMessage.style.color = '#ff0000';
+    }
+}
+
+// --- وظيفة بدء المرحلة 5 الجديدة ---
+function startStage5() {
+    stage = 5;
+    
+    // إظهار عناصر المرحلة 5 ذات الصلة
+    stageTitle3.classList.remove('hidden');
+    dateContainer.classList.remove('hidden');
+    
+    // إخفاء العناصر غير المطلوبة في هذه المرحلة
+    dateAnswerInput.value = '';
+    dateMessage.textContent = '';
+    
+    // بدء تأثير الطباعة للنص الجديد
+    startTypingEffectStage3(DATE_STORY_TEXT);
+}
+
+
+// --- وظيفة التحقق من إجابة المرحلة 5 الجديدة ---
+function checkAnswerStage5() {
+    const userAnswer = dateAnswerInput.value.trim().toLowerCase(); // تحويل إلى أحرف صغيرة لتسهيل التحقق
+    
+    const isCorrect = ACCEPTED_ANSWERS_STAGE_3.some(accepted => 
+        accepted === userAnswer
+    );
+
+    if (isCorrect) {
+        dateMessage.textContent = " sa7it , choft el story mte3i ?...";
+        dateMessage.style.color = '#00ff00';
+        
+        // هنا يمكنك إضافة دالة للمرحلة التالية 
+        // setTimeout(startNextStage, 3000); 
+        
+    } else {
+        dateMessage.textContent =" taw hedhi me tala3t'hech ? 11 decembre 2005 b ema nhar jee ? ( en francais ) ...";
+        dateMessage.style.color = '#ff0000';
+    }
+}
+
+
 // --- تعيين مستمعي الأحداث ---
 clickTracker2.addEventListener('click', handleTrackerClick);
 clickTracker1.addEventListener('click', handleTrackerClick);
 toggleButton.addEventListener('click', handleFinalButtonClick);
+
+// مستمع أحداث المرحلة 3
 checkButton.addEventListener('click', checkAnswer);
 answerInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
         checkAnswer();
+    }
+});
+
+// مستمع أحداث المرحلة 4 (الانتقالية)
+cipherCheckButton.addEventListener('click', checkAnswerStage2);
+cipherAnswerInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        checkAnswerStage2();
+    }
+});
+
+// مستمع أحداث المرحلة 5 الجديدة
+dateCheckButton.addEventListener('click', checkAnswerStage5);
+dateAnswerInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        checkAnswerStage5();
     }
 });
 
