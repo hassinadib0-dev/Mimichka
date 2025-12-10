@@ -6,6 +6,7 @@ body {
 canvas{display:block}
 
 h1 {
+  /* H1: Happy Birthday MIMICHKA */
   text-align: center;
   position: absolute;
   top: 20%; 
@@ -35,7 +36,7 @@ h1 {
 
 /* موقع العنوان الأول (المرحلة 2: تحت H1) */
 #clickTracker1 {
-  top: 60%; 
+  top: 25vh; 
   left: 50%;
   transform: translateX(-50%);
   color: #aaa; 
@@ -43,34 +44,167 @@ h1 {
 
 /* موقع العنوان الثاني (المرحلة 1: أعلى الصفحة) */
 #clickTracker2 {
-  top: 1%; 
+  top: 5vh; 
   left: 50%;
   transform: translateX(-50%);
   color: #ffffff; 
 }
 
-/* التعديل على الزر المخفي / زر النهاية */
+/* الزر المخفي / زر النهاية */
 #toggleButton {
   position: absolute;
   left: 0;
   width: 100%;
-  background: transparent; /* إزالة الخلفية */
+  background: transparent; 
   border: none;
-  cursor: pointer; /* جعله قابلاً للنقر (مؤشر اليد) */
+  cursor: pointer; 
   z-index: 10;
   height: 30vh; 
   top: 70vh;
-  /* تنسيق النص */
   color: #fff;
   font-size: 2em;
   font-family: "Source Code Pro", monospace;
   transition: opacity 0.5s;
-  
-  /* مهم: إزالة pointer-events: none; لجعله قابلاً للنقر */
+}
+
+/* --- تنسيق القصة والسؤال (المرحلة 3) --- */
+#storyContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    z-index: 15;
+    color: #E0B0FF; 
+    font-family: "Source Code Pro", monospace;
+    line-height: 1.8;
+    transition: opacity 0.5s;
+}
+
+#storyText {
+    font-size: 1em;
+    white-space: pre-wrap; 
+    direction: rtl; 
+    text-align: center;
+}
+
+#answerSection {
+    margin-top: 30px;
+}
+
+#answerInput {
+    padding: 10px;
+    width: 70%;
+    border: 2px solid #E0B0FF;
+    background: transparent;
+    color: #fff;
+    font-size: 1em;
+    text-align: right; 
+}
+
+#checkButton {
+    padding: 10px 20px;
+    margin-right: 10px;
+    background: #D16587;
+    color: #020202;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#message {
+    margin-top: 15px;
+    font-size: 1.2em;
+    color: #fff;
 }
 
 /* فئة الإخفاء المشتركة */
 .hidden {
   opacity: 0 !important;
   pointer-events: none !important; 
+}
+
+/* ------------------------------------- */
+/* --- تنسيق عناصر المرحلة الرابعة --- */
+/* ------------------------------------- */
+
+/* عنوان المرحلة الجديدة (1 :) */
+#stageTitle2 {
+    position: absolute;
+    top: 5vh; 
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-family: "Source Code Pro", monospace;
+    font-size: 3em;
+    font-weight: 300;
+    z-index: 16;
+    transition: opacity 0.5s;
+}
+
+/* حاوية الرسالة المشفرة والصورة والإجابة */
+#cipherContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+    z-index: 17;
+    transition: opacity 0.5s;
+}
+
+/* الرسالة المشفرة (تظهر بالكتابة الحرفية) */
+#cipherText {
+    font-size: 2.5em; /* خط كبير وواضح */
+    color: #fff; 
+    font-family: "Source Code Pro", monospace;
+    white-space: pre-wrap; 
+    margin-bottom: 20px;
+}
+
+/* صورة شفرة مورس */
+#cipherImage {
+    max-width: 100%;
+    height: auto;
+    margin: 20px auto;
+    display: block;
+    border: 1px solid #E0B0FF;
+    transition: opacity 0.5s;
+}
+
+/* قسم الإجابة الجديد لفك الشفرة */
+#cipherAnswerSection {
+    margin-top: 30px;
+}
+
+#cipherAnswerInput {
+    padding: 10px;
+    width: 70%;
+    border: 2px solid #E0B0FF;
+    background: transparent;
+    color: #fff;
+    font-size: 1em;
+    text-align: center; /* يمكن تغييرها إلى right إذا لزم الأمر */
+}
+
+#cipherCheckButton {
+    padding: 10px 20px;
+    margin-left: 10px; /* تم تعديله ليتناسب مع اتجاه النص في الإدخال */
+    background: #D16587;
+    color: #020202;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+#cipherMessage {
+    margin-top: 15px;
+    font-size: 1.2em;
+    color: #fff;
 }

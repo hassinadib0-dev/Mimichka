@@ -5,7 +5,6 @@ const timestamp = _ => new Date().getTime()
 
 // container
 class Birthday {
-// ... (Birthday class methods remain unchanged)
   constructor() {
     this.resize()
     this.fireworks = []
@@ -63,18 +62,14 @@ class Birthday {
   }
 }
 
-// Firework class remains unchanged
 class Firework {
-// ... (Constructor and update methods remain unchanged)
   constructor(x, y, targetX, targetY, shade, offsprings) {
     this.dead = false
     this.offsprings = offsprings
-
     this.x = x
     this.y = y
     this.targetX = targetX
     this.targetY = targetY
-
     this.shade = shade
     this.history = []
   }
@@ -144,22 +139,56 @@ const clickTracker1 = document.getElementById('clickTracker1');
 const clickTracker2 = document.getElementById('clickTracker2'); 
 const toggleButton = document.getElementById('toggleButton');
 
+// عناصر القصة والإجابة الجديدة
+const storyContainer = document.getElementById('storyContainer');
+const storyTextElement = document.getElementById('storyText');
+const answerSection = document.getElementById('answerSection');
+const answerInput = document.getElementById('answerInput');
+const checkButton = document.getElementById('checkButton');
+const messageElement = document.getElementById('message');
+
 let stage = 1;
 let tapCount = 0; 
+
+// القصة والسؤال والإجابة الصحيحة
+const STORY_TEXT = "Lw9t ,\nWnti ta9ra fi El klem hedha ena mnich bjnbk , kolou bsbb lwa9t , taaref Mariem netwa7chek w brcha w nesstanek \nbel theweni w El d9aya9 w El sweye3";
+const ACCEPTED_ANSWERS = ["1062"]; // تم تثبيت الإجابة الصحيحة على "1062" بناءً على طلبك الأخير
+
 
 // إعداد الحالة الأولية
 clickTracker2.textContent = 'TAP HERE 5 TIMES';
 clickTracker2.style.pointerEvents = 'auto';
 
 
-// --- وظيفة معالجة النقر على العناوين ---
+// --- وظيفة الطباعة الحرفية (Typing Effect) ---
+function startTypingEffect(text) {
+    let i = 0;
+    storyContainer.classList.remove('hidden');
+    answerSection.classList.add('hidden'); 
+    storyTextElement.textContent = ''; 
+    
+    const typingInterval = setInterval(() => {
+        if (i < text.length) {
+            storyTextElement.textContent += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(typingInterval);
+            // إظهار قسم الإجابة بعد الانتهاء
+            answerSection.classList.remove('hidden'); 
+            answerInput.style.pointerEvents = 'auto'; 
+            checkButton.style.pointerEvents = 'auto';
+        }
+    }, 40); 
+}
+
+
+// --- وظيفة معالجة النقر على العناوين (المرحلة 1 و 2) ---
 function handleTrackerClick(evt) {
     
     // منع النقر إذا لم يكن العنصر المستهدف هو العنوان النشط
     if (stage === 1 && evt.currentTarget.id !== 'clickTracker2') return;
     if (stage === 2 && evt.currentTarget.id !== 'clickTracker1') return;
     
-    // 1. تشغيل الألعاب النارية في موقع النقر
     birthday.onClick(evt);
     
     tapCount++;
@@ -175,14 +204,11 @@ function handleTrackerClick(evt) {
             stage = 2;
             tapCount = 0; 
             
-            // 1. إخفاء clickTracker2
             clickTracker2.classList.add('hidden');
-            // 2. إظهار العنوان الرئيسي و clickTracker1
-            pageTitle.classList.remove('hidden');
+            pageTitle.classList.remove('hidden'); // إظهار العنوان الرئيسي
             clickTracker1.classList.remove('hidden');
             clickTracker1.textContent = 'tap here 3 times';
             
-            // 3. جعل clickTracker1 قابلاً للنقر، وإلغاء clickTracker2
             clickTracker2.style.pointerEvents = 'none';
             clickTracker1.style.pointerEvents = 'auto';
         }
@@ -196,36 +222,105 @@ function handleTrackerClick(evt) {
             // الانتقال للمرحلة الثالثة
             stage = 3;
             
-            // 1. إخفاء كل من العنوان الرئيسي و clickTracker1
-            
+            pageTitle.classList.add('hidden');
             clickTracker1.classList.add('hidden');
             
-            // 2. إظهار الزر المخفي مع النص المطلوب وجعله قابلاً للنقر
             toggleButton.classList.remove('hidden');
             toggleButton.textContent = 'click here now';
-            // إزالة pointerEvents من هنا ليعتمد على CSS (والذي أصبح pointer: auto)
         }
     }
 }
 
-// --- وظيفة إخفاء الزر عند النقر عليه ---
+// --- وظيفة إخفاء الزر وبدء القصة (المرحلة 3) ---
 function handleFinalButtonClick(evt) {
     // 1. تشغيل الألعاب النارية
     birthday.onClick(evt);
     
-    // 2. إخفاء الزر بعد النقر عليه مرة واحدة
+    // 2. إخفاء الزر
     toggleButton.classList.add('hidden');
-  pageTitle.classList.add('hidden');
+    
+    // 3. بدء تأثير الطباعة للقصة
+    startTypingEffect(STORY_TEXT);
+    
+    // إزالة مستمع الحدث بعد النقر الأول لضمان عمله مرة واحدة فقط
+    toggleButton.removeEventListener('click', handleFinalButtonClick);
 }
 
-// --- تعيين مستمعي الأحداث للعناوين والزر النهائي ---
 
-// نقرات المراحل 1 و 2
+// --- وظيفة إخفاء جميع عناصر القصة ---
+function hideAllStoryElements() {
+    // إخفاء حاوية القصة بالكامل (بما في ذلك الرسالة والعد التنازلي)
+    storyContainer.classList.add('hidden');
+    storyContainer.style.pointerEvents = 'none'; 
+}
+
+
+// --- وظيفة العد التنازلي ---
+function startCountdown() {
+    let count = 10;
+    
+    // إخفاء نص القصة والسؤال بمجرد بدء العد
+    storyTextElement.classList.add('hidden');
+    
+    const countdownInterval = setInterval(() => {
+        
+        if (count >= 0) {
+            // عرض الرقم الحالي في نفس عنصر الرسالة (للحفاظ على التنسيق والموقع)
+            messageElement.textContent = count;
+        }
+        
+        if (count < 0) {
+            clearInterval(countdownInterval);
+            
+            // إخفاء جميع العناصر المكتوبة بالكامل عندما يصل إلى الصفر
+            hideAllStoryElements();
+        }
+        
+        count--;
+        
+    }, 1000);
+}
+
+
+// --- وظيفة التحقق من الإجابة ---
+function checkAnswer() {
+    const userAnswer = answerInput.value.trim();
+    
+    const isCorrect = ACCEPTED_ANSWERS.some(accepted => 
+        accepted === userAnswer
+    );
+
+    if (isCorrect) {
+        messageElement.textContent = "BRAVOO ,wlh hak tala3t'ha \n taw najmou nebdew";
+        messageElement.style.color = '#00ff00';
+        
+        // إخفاء حقل الإدخال والزر (كما طلبت مسبقاً)
+        answerInput.classList.add('hidden');
+        checkButton.classList.add('hidden');
+        answerInput.style.pointerEvents = 'none';
+        checkButton.style.pointerEvents = 'none';
+
+        // البدء بالعد التنازلي بعد 3 ثوانٍ من ظهور رسالة النجاح
+        // تم ترك التوقيت (3 ثوانٍ) لمنح وقت لقراءة الرسالة
+        setTimeout(startCountdown, 3000);
+        
+    } else {
+        messageElement.textContent ="khamem mariem win tnjm tal9a el theweni w el d9aye9 w el sweye3...";
+        messageElement.style.color = '#ff0000';
+    }
+}
+
+
+// --- تعيين مستمعي الأحداث ---
 clickTracker2.addEventListener('click', handleTrackerClick);
 clickTracker1.addEventListener('click', handleTrackerClick);
-
-// نقرة المرحلة النهائية (على الزر نفسه)
 toggleButton.addEventListener('click', handleFinalButtonClick);
+checkButton.addEventListener('click', checkAnswer);
+answerInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        checkAnswer();
+    }
+});
 
 
   ;(function loop(){
