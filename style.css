@@ -1,20 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing Script&family=Source+Code+Pro');
 body {
   margin: 0;
   background: #020202;
-  cursor: crosshair;
 }
 canvas{display:block}
+
 h1 {
+  text-align: center;
   position: absolute;
-  top: 20%;
+  top: 20%; 
   left: 50%;
   transform: translate(-50%, -50%);
   color: #fff;
-  font-family: "Source Sans Pro";
+  font-family: "Dancing Script";
   font-size: 5em;
-  font-weight: 900;
+  font-weight: 200;
   -webkit-user-select: none;
   user-select: none;
-
+  z-index: 5; 
+  transition: opacity 0.5s; 
+  margin-bottom: 0;
 }
 
+/* تنسيق العناصر الخاصة بتتبع النقرات */
+.tracker {
+  text-align: center;
+  position: absolute;
+  color: #aaa; 
+  font-family: "Dancing Script";
+  font-size: 1.2em; /* تصغير الخط */
+  font-weight: 300;
+  z-index: 6; 
+  transition: opacity 0.5s;
+}
+
+/* موقع العنوان الأول (تحت H1) */
+#clickTracker1 {
+  top: 60%; /* أسفل العنوان الرئيسي مباشرة (الذي ينتهي عند 20% تقريباً) */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* موقع العنوان الثاني (أعلى الصفحة) */
+#clickTracker2 {
+  top: 0%; /* أعلى الصفحة */
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffffff; 
+}
+
+/* تنسيق الزر المخفي (يبقى في الأسفل لتلقي النقرات) */
+#toggleButton {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  height: 30vh; 
+  top: 70vh; 
+  /* نتأكد أنه غير مرئي ولا يحمل نصاً */
+  opacity: 0; 
+  pointer-events: auto; /* يجب أن يستقبل النقرات */
+}
+
+/* فئة الإخفاء المشتركة */
+.hidden {
+  opacity: 0 !important;
+  pointer-events: none !important; 
+}

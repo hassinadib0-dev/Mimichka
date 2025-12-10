@@ -142,8 +142,84 @@ let then = timestamp()
 
 let birthday = new Birthday
 window.onresize = () => birthday.resize()
-document.onclick = evt => birthday.onClick(evt)
-document.ontouchstart = evt => birthday.onClick(evt)
+
+// العناصر
+const pageTitle = document.getElementById('pageTitle');
+const clickTracker1 = document.getElementById('clickTracker1'); // تحت H1
+const clickTracker2 = document.getElementById('clickTracker2'); // في الأعلى
+const toggleButton = document.getElementById('toggleButton'); // يبقى موجوداً لكن لا يُستخدم في المنطق
+
+let clickCount = 0;
+let stage = 1; // 1: نقر 3 مرات، 2: نقر مرتين، 3: نقر مرة واحدة
+
+// إعداد الحالة الأولية
+clickTracker1.textContent = 'click here 3 times';
+clickTracker2.classList.add('hidden'); 
+
+function handleGlobalClick(evt) {
+    // 1. تشغيل الألعاب النارية
+    birthday.onClick(evt);
+
+    // 2. تشغيل منطق تتبع النقرات
+    
+    // منع تسجيل النقرات بعد انتهاء التسلسل
+    if (stage === 3 && clickCount === 1) {
+        return; 
+    }
+    
+    clickCount++;
+
+    if (stage === 1) {
+        const required = 3;
+        const remaining = required - clickCount;
+        
+        if (clickCount < required) {
+            clickTracker1.textContent = `click here ${remaining} times`;
+        } else if (clickCount === required) {
+            // الانتقال للمرحلة الثانية بعد 3 نقرات
+            stage = 2;
+            clickCount = 0; 
+            
+            // إخفاء العنوان الرئيسي والأول
+            pageTitle.classList.add('hidden'); 
+            clickTracker1.classList.add('hidden');
+            
+            // إظهار الثاني بالنص الجديد
+            clickTracker2.textContent = 'click here 2 times';
+            clickTracker2.classList.remove('hidden');
+        }
+    } else if (stage === 2) {
+        const required = 2;
+        const remaining = required - clickCount;
+        
+        if (clickCount < required) {
+            clickTracker2.textContent = `click here ${remaining} times`;
+        } else if (clickCount === required) {
+            // الانتقال للمرحلة الثالثة بعد نقرتين
+            stage = 3;
+            clickCount = 0; 
+            
+            // إخفاء الثاني
+            clickTracker2.classList.add('hidden');
+            
+            // إظهار العنوان الأخير (clickTracker1)
+            clickTracker1.textContent = 'click here 1 time';
+            clickTracker1.classList.remove('hidden');
+        }
+    } else if (stage === 3) {
+        const required = 1;
+        
+        if (clickCount === required) {
+            // الإخفاء النهائي بعد نقرة واحدة
+            clickTracker1.classList.add('hidden');
+            toggleButton.classList.add('hidden'); 
+        }
+    }
+}
+
+// تعيين الدالة الجديدة لمعالجة النقر على كامل الوثيقة
+document.onclick = handleGlobalClick;
+document.ontouchstart = handleGlobalClick;
 
   ;(function loop(){
   	requestAnimationFrame(loop)
@@ -153,6 +229,5 @@ document.ontouchstart = evt => birthday.onClick(evt)
 
     then = now
     birthday.update(delta / 1000)
-  	
 
   })()
