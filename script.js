@@ -5,13 +5,11 @@ const timestamp = _ => new Date().getTime()
 
 // container
 class Birthday {
+// ... (Birthday class methods remain unchanged)
   constructor() {
     this.resize()
-
-    // create a lovely place to store the firework
     this.fireworks = []
     this.counter = 0
-
   }
   
   resize() {
@@ -23,7 +21,6 @@ class Birthday {
     this.height = canvas.height = window.innerHeight
     this.spawnC = this.height * .1
     this.spawnD = this.height * .5
-    
   }
   
   onClick(evt) {
@@ -40,7 +37,6 @@ class Birthday {
         random(30, 110)))
           
      this.counter = -1
-     
   }
   
   update(delta) {
@@ -51,8 +47,7 @@ class Birthday {
     ctx.globalCompositeOperation = 'lighter'
     for (let firework of this.fireworks) firework.update(delta)
 
-    // if enough time passed... create new new firework
-    this.counter += delta * 3 // each second
+    this.counter += delta * 3 
     if (this.counter >= 1) {
       this.fireworks.push(new Firework(
         random(this.spawnA, this.spawnB),
@@ -64,13 +59,13 @@ class Birthday {
       this.counter = 0
     }
 
-    // remove the dead fireworks
     if (this.fireworks.length > 1000) this.fireworks = this.fireworks.filter(firework => !firework.dead)
-
   }
 }
 
+// Firework class remains unchanged
 class Firework {
+// ... (Constructor and update methods remain unchanged)
   constructor(x, y, targetX, targetY, shade, offsprings) {
     this.dead = false
     this.offsprings = offsprings
@@ -145,81 +140,93 @@ window.onresize = () => birthday.resize()
 
 // العناصر
 const pageTitle = document.getElementById('pageTitle');
-const clickTracker1 = document.getElementById('clickTracker1'); // تحت H1
-const clickTracker2 = document.getElementById('clickTracker2'); // في الأعلى
-const toggleButton = document.getElementById('toggleButton'); // يبقى موجوداً لكن لا يُستخدم في المنطق
+const clickTracker1 = document.getElementById('clickTracker1'); 
+const clickTracker2 = document.getElementById('clickTracker2'); 
+const toggleButton = document.getElementById('toggleButton');
 
-let clickCount = 0;
-let stage = 1; // 1: نقر 3 مرات، 2: نقر مرتين، 3: نقر مرة واحدة
+let stage = 1;
+let tapCount = 0; 
 
 // إعداد الحالة الأولية
-clickTracker1.textContent = 'click here 3 times';
-clickTracker2.classList.add('hidden'); 
+clickTracker2.textContent = 'TAP HERE 5 TIMES';
+clickTracker2.style.pointerEvents = 'auto';
 
-function handleGlobalClick(evt) {
-    // 1. تشغيل الألعاب النارية
+
+// --- وظيفة معالجة النقر على العناوين ---
+function handleTrackerClick(evt) {
+    
+    // منع النقر إذا لم يكن العنصر المستهدف هو العنوان النشط
+    if (stage === 1 && evt.currentTarget.id !== 'clickTracker2') return;
+    if (stage === 2 && evt.currentTarget.id !== 'clickTracker1') return;
+    
+    // 1. تشغيل الألعاب النارية في موقع النقر
     birthday.onClick(evt);
-
-    // 2. تشغيل منطق تتبع النقرات
     
-    // منع تسجيل النقرات بعد انتهاء التسلسل
-    if (stage === 3 && clickCount === 1) {
-        return; 
-    }
-    
-    clickCount++;
+    tapCount++;
 
     if (stage === 1) {
-        const required = 3;
-        const remaining = required - clickCount;
+        const required = 5;
+        const remaining = required - tapCount;
         
-        if (clickCount < required) {
-            clickTracker1.textContent = `click here ${remaining} times`;
-        } else if (clickCount === required) {
-            // الانتقال للمرحلة الثانية بعد 3 نقرات
+        clickTracker2.textContent = `TAP HERE ${remaining} TIMES`;
+
+        if (tapCount === required) {
+            // الانتقال للمرحلة الثانية
             stage = 2;
-            clickCount = 0; 
+            tapCount = 0; 
             
-            // إخفاء العنوان الرئيسي والأول
-            pageTitle.classList.add('hidden'); 
-            clickTracker1.classList.add('hidden');
+            // 1. إخفاء clickTracker2
+            clickTracker2.classList.add('hidden');
+            // 2. إظهار العنوان الرئيسي و clickTracker1
+            pageTitle.classList.remove('hidden');
+            clickTracker1.classList.remove('hidden');
+            clickTracker1.textContent = 'tap here 3 times';
             
-            // إظهار الثاني بالنص الجديد
-            clickTracker2.textContent = 'click here 2 times';
-            clickTracker2.classList.remove('hidden');
+            // 3. جعل clickTracker1 قابلاً للنقر، وإلغاء clickTracker2
+            clickTracker2.style.pointerEvents = 'none';
+            clickTracker1.style.pointerEvents = 'auto';
         }
     } else if (stage === 2) {
-        const required = 2;
-        const remaining = required - clickCount;
+        const required = 3;
+        const remaining = required - tapCount;
         
-        if (clickCount < required) {
-            clickTracker2.textContent = `click here ${remaining} times`;
-        } else if (clickCount === required) {
-            // الانتقال للمرحلة الثالثة بعد نقرتين
+        clickTracker1.textContent = `tap here ${remaining} times`;
+
+        if (tapCount === required) {
+            // الانتقال للمرحلة الثالثة
             stage = 3;
-            clickCount = 0; 
             
-            // إخفاء الثاني
-            clickTracker2.classList.add('hidden');
+            // 1. إخفاء كل من العنوان الرئيسي و clickTracker1
             
-            // إظهار العنوان الأخير (clickTracker1)
-            clickTracker1.textContent = 'click here 1 time';
-            clickTracker1.classList.remove('hidden');
-        }
-    } else if (stage === 3) {
-        const required = 1;
-        
-        if (clickCount === required) {
-            // الإخفاء النهائي بعد نقرة واحدة
             clickTracker1.classList.add('hidden');
-            toggleButton.classList.add('hidden'); 
+            
+            // 2. إظهار الزر المخفي مع النص المطلوب وجعله قابلاً للنقر
+            toggleButton.classList.remove('hidden');
+            toggleButton.textContent = 'click here now';
+            // إزالة pointerEvents من هنا ليعتمد على CSS (والذي أصبح pointer: auto)
         }
     }
 }
 
-// تعيين الدالة الجديدة لمعالجة النقر على كامل الوثيقة
-document.onclick = handleGlobalClick;
-document.ontouchstart = handleGlobalClick;
+// --- وظيفة إخفاء الزر عند النقر عليه ---
+function handleFinalButtonClick(evt) {
+    // 1. تشغيل الألعاب النارية
+    birthday.onClick(evt);
+    
+    // 2. إخفاء الزر بعد النقر عليه مرة واحدة
+    toggleButton.classList.add('hidden');
+  pageTitle.classList.add('hidden');
+}
+
+// --- تعيين مستمعي الأحداث للعناوين والزر النهائي ---
+
+// نقرات المراحل 1 و 2
+clickTracker2.addEventListener('click', handleTrackerClick);
+clickTracker1.addEventListener('click', handleTrackerClick);
+
+// نقرة المرحلة النهائية (على الزر نفسه)
+toggleButton.addEventListener('click', handleFinalButtonClick);
+
 
   ;(function loop(){
   	requestAnimationFrame(loop)

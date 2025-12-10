@@ -13,7 +13,7 @@ h1 {
   transform: translate(-50%, -50%);
   color: #fff;
   font-family: "Dancing Script";
-  font-size: 7em;
+  font-size: 5em;
   font-weight: 200;
   -webkit-user-select: none;
   user-select: none;
@@ -26,43 +26,47 @@ h1 {
 .tracker {
   text-align: center;
   position: absolute;
-  color: #aaa; 
-  font-family: "Dancing Script";
-  font-size: 1.2em; /* تصغير الخط */
+  font-family: "Source Code Pro", monospace;
+  font-size: 1.2em;
   font-weight: 300;
   z-index: 6; 
   transition: opacity 0.5s;
 }
 
-/* موقع العنوان الأول (تحت H1) */
+/* موقع العنوان الأول (المرحلة 2: تحت H1) */
 #clickTracker1 {
-  top: 60%; /* أسفل العنوان الرئيسي مباشرة (الذي ينتهي عند 20% تقريباً) */
+  top: 60%; 
   left: 50%;
   transform: translateX(-50%);
+  color: #aaa; 
 }
 
-/* موقع العنوان الثاني (أعلى الصفحة) */
+/* موقع العنوان الثاني (المرحلة 1: أعلى الصفحة) */
 #clickTracker2 {
-  top: 0%; /* أعلى الصفحة */
+  top: 1%; 
   left: 50%;
   transform: translateX(-50%);
   color: #ffffff; 
 }
 
-/* تنسيق الزر المخفي (يبقى في الأسفل لتلقي النقرات) */
+/* التعديل على الزر المخفي / زر النهاية */
 #toggleButton {
   position: absolute;
   left: 0;
   width: 100%;
-  background: transparent;
+  background: transparent; /* إزالة الخلفية */
   border: none;
-  cursor: pointer;
+  cursor: pointer; /* جعله قابلاً للنقر (مؤشر اليد) */
   z-index: 10;
   height: 30vh; 
-  top: 70vh; 
-  /* نتأكد أنه غير مرئي ولا يحمل نصاً */
-  opacity: 0; 
-  pointer-events: auto; /* يجب أن يستقبل النقرات */
+  top: 70vh;
+  /* تنسيق النص */
+  color: #fff;
+  font-size: 2em;
+  font-family: "Source Code Pro", monospace;
+  transition: opacity 0.5s;
+  
+  /* مهم: إزالة pointer-events: none; لجعله قابلاً للنقر */
 }
 
 /* فئة الإخفاء المشتركة */
